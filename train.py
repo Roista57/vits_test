@@ -138,6 +138,7 @@ def train_and_evaluate(rank, epoch, hps, nets, optims, schedulers, scaler, loade
 
   net_g.train()
   net_d.train()
+  start_timer = time.time() # start the timer
   for batch_idx, (x, x_lengths, spec, spec_lengths, y, y_lengths) in enumerate(train_loader):
     start_time = time.time() # start the timer
     x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
@@ -233,7 +234,9 @@ def train_and_evaluate(rank, epoch, hps, nets, optims, schedulers, scaler, loade
     global_step += 1
   
   if rank == 0:
-    logger.info('====> Epoch: {}'.format(epoch))
+    end_timer = time.time() # end the timer
+    batch_timer = end_timer - start_timer # calculate the execution time of the batch
+    logger.info('====> Epoch: {} Batch timer: {:.2f}s'.format(epoch, batch_timer))
 
  
 def evaluate(hps, generator, eval_loader, writer_eval):
