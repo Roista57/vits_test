@@ -1,8 +1,8 @@
-Cython==0.29.21
+Cython==0.29.23
 librosa==0.8.0
-matplotlib==3.3.1
-numpy==1.18.5
+matplotlib==3.3.4
+numpy==1.19.5
 phonemizer==2.2.1
-scipy==1.5.2
-tensorboard==2.3.0
-Unidecode==1.1.1
+scipy==1.4.1
+tensorboard==2.4.1
+Unidecode==1.2.0
