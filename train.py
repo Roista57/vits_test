@@ -204,9 +204,8 @@ def train_and_evaluate(rank, epoch, hps, nets, optims, schedulers, scaler, loade
         losses = [loss_disc, loss_gen, loss_fm, loss_mel, loss_dur, loss_kl]
         end_time = time.time() # end the timer
         batch_time = end_time - start_time # calculate the execution time of the batch
-        logger.info('Train Epoch: {} [{:.0f}%]'.format(
-          epoch,
-          100. * batch_idx / len(train_loader)))
+        logger.info('Train Epoch: {} [{:.0f}%] Batch time: {:.2f}s'.format(
+        epoch, 100. * batch_idx / len(train_loader), batch_time))
         logger.info([x.item() for x in losses] + [global_step, lr])
         
         scalar_dict = {"loss/g/total": loss_gen_all, "loss/d/total": loss_disc_all, "learning_rate": lr, "grad_norm_d": grad_norm_d, "grad_norm_g": grad_norm_g}
