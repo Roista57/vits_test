@@ -58,6 +58,6 @@ def create_audio():
     audio_path = os.path.join(audio_save_path, audio_name)
     write(audio_path, hps.data.sampling_rate,
           audio)
-    Audio(audio, rate=hps.data.sampling_rate, normalize=False)
+    #Audio(audio, rate=hps.data.sampling_rate, normalize=False)
     print(audio_name, '오디오 생성을 완료하였습니다.')
     
