@@ -53,7 +53,10 @@ def create_audio():
             0, 0].data.cpu().float().numpy()
 
     # Save generated audio
-    write("/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/generated_audio.wav", hps.data.sampling_rate,
+    audio_save_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/"
+    audio_name = latest_pth+".wav"
+    audio_path = os.path.join(audio_save_path, audio_name)
+    write(audio_path, hps.data.sampling_rate,
           audio)
     print('오디오 생성을 완료하였습니다.')
     Audio(audio, rate=hps.data.sampling_rate, normalize=False)
