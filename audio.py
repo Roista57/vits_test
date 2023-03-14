@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import IPython.display as ipd
+from IPython.display import Audio
 
 import os
 import json
@@ -55,5 +55,5 @@ def create_audio():
     # Save generated audio
     write("/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/generated_audio.wav", hps.data.sampling_rate,
           audio)
-
-    ipd.display(ipd.Audio(audio, rate=hps.data.sampling_rate, normalize=False))
+    print('오디오 생성을 완료하였습니다.')
+    Audio(audio, rate=hps.data.sampling_rate, normalize=False)
