@@ -6,3 +6,5 @@ https://drive.google.com/file/d/1qn6wc1E39LQVDKWKCWuoezLXPrqaFXL0/view?usp=share
 
 <h2>학습 진행에 따른 음성 변화(0 Step ~ 26000 Step)</h2>
 https://roista57.github.io/vits_demo_audio/
+
+[preprocessing 하는 방법 추가 필요]
