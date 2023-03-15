@@ -5,6 +5,7 @@ import itertools
 import math
 import time
 import datetime
+import pytz
 import torch
 from torch import nn, optim
 from torch.nn import functional as F
@@ -210,8 +211,14 @@ def train_and_evaluate(rank, epoch, hps, nets, optims, schedulers, scaler, loade
         logger.info('Train Epoch: {} [{:.0f}%] Batch time: {:.2f}s'.format(
         epoch, 100. * batch_idx / len(train_loader), batch_time))
         
-        logger.info([x.item() for x in losses] + [global_step, lr] + [datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
-        #logger.info([x.item() for x in losses] + [global_step, lr])
+        # 서버의 현재 시간을 UTC로 가져옵니다.
+        now_utc = datetime.datetime.now(pytz.timezone('UTC'))
+        # UTC 시간을 한국 시간으로 변환합니다.
+        now_korea = now_utc.astimezone(pytz.timezone('Asia/Seoul'))
+        # 한국 시간을 문자열로 출력합니다.
+        
+        logger.info(now_korea.strftime("%Y-%m-%d %H:%M:%S"), "Global Step :", global_step)
+        logger.info([x.item() for x in losses] + [global_step, lr])
         
         scalar_dict = {"loss/g/total": loss_gen_all, "loss/d/total": loss_disc_all, "learning_rate": lr, "grad_norm_d": grad_norm_d, "grad_norm_g": grad_norm_g}
         scalar_dict.update({"loss/g/fm": loss_fm, "loss/g/mel": loss_mel, "loss/g/dur": loss_dur, "loss/g/kl": loss_kl})
