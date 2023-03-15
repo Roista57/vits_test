@@ -31,9 +31,8 @@ def create_audio(global_step):
     hps = utils.get_hparams_from_file("/content/vits_test/configs/ljs_base.json")
 
     logs_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/"
-    pth_files = [f for f in os.listdir(logs_path) if f.startswith("G_")]
-    latest_pth = max(pth_files, key=lambda x: int(x.split("_")[1].split(".")[0]))
-
+    #pth_files = [f for f in os.listdir(logs_path) if f.startswith("G_")]
+    #latest_pth = max(pth_files, key=lambda x: int(x.split("_")[1].split(".")[0]))
     path = os.path.join(logs_path, "G_{}.pth".format(global_step)))
 
     net_g = SynthesizerTrn(
@@ -53,11 +52,9 @@ def create_audio(global_step):
             0, 0].data.cpu().float().numpy()
 
     # Save generated audio
-    audio_save_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/"
-    audio_name = "G_{}.wav".format(global_step))
-    audio_path = os.path.join(audio_save_path, audio_name)
-    write(audio_path, hps.data.sampling_rate,
+    audio_save_path = os.path.join("/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/", "G_{}.wav".format(global_step))
+    write(audio_save_path, hps.data.sampling_rate,
           audio)
     #Audio(audio, rate=hps.data.sampling_rate, normalize=False)
-    print(audio_name, '오디오 생성을 완료하였습니다.')
+    print("G_{}.wav 오디오 생성을 완료하였습니다.".format(global_step))
     
