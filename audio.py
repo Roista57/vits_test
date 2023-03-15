@@ -27,14 +27,14 @@ def get_text(text, hps):
     return text_norm
 
 
-def create_audio():
+def create_audio(global_step):
     hps = utils.get_hparams_from_file("/content/vits_test/configs/ljs_base.json")
 
     logs_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/"
     pth_files = [f for f in os.listdir(logs_path) if f.startswith("G_")]
     latest_pth = max(pth_files, key=lambda x: int(x.split("_")[1].split(".")[0]))
 
-    path = os.path.join(logs_path, latest_pth)
+    path = os.path.join(logs_path, "G_{}.pth".format(global_step)))
 
     net_g = SynthesizerTrn(
         len(symbols),
@@ -54,7 +54,7 @@ def create_audio():
 
     # Save generated audio
     audio_save_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/test_wave/"
-    audio_name = latest_pth+".wav"
+    audio_name = "G_{}.wav".format(global_step))
     audio_path = os.path.join(audio_save_path, audio_name)
     write(audio_path, hps.data.sampling_rate,
           audio)
