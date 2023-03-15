@@ -33,7 +33,7 @@ def create_audio(global_step):
     logs_path = "/content/drive/My Drive/Colab Notebooks/logs/ljs_base/"
     #pth_files = [f for f in os.listdir(logs_path) if f.startswith("G_")]
     #latest_pth = max(pth_files, key=lambda x: int(x.split("_")[1].split(".")[0]))
-    path = os.path.join(logs_path, "G_{}.pth".format(global_step)))
+    path = os.path.join(logs_path, "G_{}.pth".format(global_step))
 
     net_g = SynthesizerTrn(
         len(symbols),
