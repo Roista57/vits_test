@@ -217,7 +217,7 @@ def train_and_evaluate(rank, epoch, hps, nets, optims, schedulers, scaler, loade
         now_korea = now_utc.astimezone(pytz.timezone('Asia/Seoul'))
         # 한국 시간을 문자열로 출력합니다.
         
-        logger.info(now_korea.strftime("%Y-%m-%d %H:%M:%S"), "Global Step :", global_step)
+        logger.info("now_korea: %s, global_step: %d", now_korea.strftime("%Y-%m-%d %H:%M:%S"), global_step)
         logger.info([x.item() for x in losses] + [global_step, lr])
         
         scalar_dict = {"loss/g/total": loss_gen_all, "loss/d/total": loss_disc_all, "learning_rate": lr, "grad_norm_d": grad_norm_d, "grad_norm_g": grad_norm_g}
